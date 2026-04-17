@@ -147,3 +147,15 @@ A configuração fica salva em: `%USERPROFILE%\.rm\config.json`
 | `rmc kill rm` | Encerra apenas rm.exe |
 | `rmc where host` | Mostra caminho do executável (Atual) |
 | `rmc where rm VERSAO` | Mostra caminho do executável (Legado) |
+| `rmc version` | Mostra a versão instalada |
+| `rmc update` | Atualiza o CLI para a última versão |
+
+## 🔄 Atualizando
+
+Para atualizar o CLI para a versão mais recente:
+
+```cmd
+rmc update
+```
+
+O comando verifica automaticamente se há uma nova versão no GitHub e atualiza os arquivos locais.

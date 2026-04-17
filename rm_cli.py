@@ -3,7 +3,12 @@ import sys
 import json
 import subprocess
 import argparse
+import urllib.request
 from pathlib import Path
+
+VERSION = "1.2.0"
+
+GITHUB_RAW = "https://raw.githubusercontent.com/douglaskalleu/rm-cli/master"
 
 # Configuração
 CONFIG_DIR = Path.home() / ".rm"
@@ -90,6 +95,63 @@ def start_process(exe_path: Path):
         sys.exit(1)
 
 # Comandos do CLI
+def cmd_version(args, config: dict):
+    """Comando: version - Mostra a versão atual."""
+    print(f"🖥️  RMC CLI v{VERSION}")
+
+
+def cmd_update(args, config: dict):
+    """Comando: update - Atualiza o CLI para a última versão."""
+    print(f"🔄 Versão atual: v{VERSION}")
+    print("📡 Verificando atualizações no GitHub...")
+
+    # Descobrir onde o CLI está instalado (pasta do próprio script)
+    install_dir = Path(__file__).resolve().parent
+
+    try:
+        # Baixar versão remota para checar
+        remote_url = f"{GITHUB_RAW}/rm_cli.py"
+        req = urllib.request.Request(remote_url)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            remote_content = resp.read().decode("utf-8")
+
+        # Extrair versão remota
+        remote_version = None
+        for line in remote_content.splitlines():
+            if line.startswith("VERSION"):
+                remote_version = line.split('"')[1]
+                break
+
+        if not remote_version:
+            print("❌ Não foi possível verificar a versão remota.")
+            return
+
+        if remote_version == VERSION:
+            print(f"✅ Você já está na versão mais recente (v{VERSION}).")
+            return
+
+        print(f"🆕 Nova versão disponível: v{remote_version}")
+        print(f"📂 Atualizando em: {install_dir}")
+        print()
+
+        # Baixar e sobrescrever rm_cli.py
+        cli_path = install_dir / "rm_cli.py"
+        with open(cli_path, "w", encoding="utf-8") as f:
+            f.write(remote_content)
+        print("✅ rm_cli.py atualizado!")
+
+        # Baixar e sobrescrever rmc.bat
+        bat_url = f"{GITHUB_RAW}/rmc.bat"
+        bat_path = install_dir / "rmc.bat"
+        urllib.request.urlretrieve(bat_url, str(bat_path))
+        print("✅ rmc.bat atualizado!")
+
+        print(f"\n🎉 Atualizado para v{remote_version}!")
+
+    except Exception as e:
+        print(f"❌ Erro ao atualizar: {e}")
+
+
 def cmd_kill(args, config: dict):
     """Comando: kill - Encerra processos RM conhecidos."""
     app = getattr(args, "app", None)
@@ -375,6 +437,12 @@ Exemplos de uso:
     # list
     subparsers.add_parser("list", help="Lista versões disponíveis")
 
+    # update
+    subparsers.add_parser("update", help="Atualiza o CLI para a última versão")
+
+    # version
+    subparsers.add_parser("version", help="Mostra a versão atual")
+
     # kill
     p_kill = subparsers.add_parser("kill", help="Encerra processos RM (todos ou específico)")
     p_kill.add_argument(
@@ -426,6 +494,8 @@ def main():
         "config": cmd_config,
         "where": cmd_where,
         "kill": cmd_kill,
+        "update": cmd_update,
+        "version": cmd_version,
     }
 
     handler = commands.get(args.command)
