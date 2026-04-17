@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# VS Code
+.vscode/
+
+# Configuração local do usuário (não subir dados pessoais)
+# O config.json fica em ~/.rm/ então não precisa ignorar aqui
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

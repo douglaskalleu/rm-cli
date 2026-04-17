@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "rm-cli"
+version = "1.0.0"
+description = "CLI para gerenciar e iniciar aplicações RM (rm.host.exe e rm.exe)"
+requires-python = ">=3.8"
+
+[project.scripts]
+rmc = "rm_cli:main"
