@@ -82,11 +82,8 @@ def start_process(exe_path: Path):
 
     print(f"🚀 Iniciando: {exe_path}")
     try:
-        subprocess.Popen(
-            [str(exe_path)],
-            cwd=str(exe_path.parent),
-            creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
-        )
+        os.chdir(exe_path.parent)
+        os.startfile(str(exe_path))
         print(f"✅ {exe_path.name} iniciado com sucesso!")
     except Exception as e:
         print(f"❌ Erro ao iniciar {exe_path.name}: {e}")
