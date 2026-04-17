@@ -25,25 +25,48 @@ C:\SuaPasta\
 
 ## ⚡ Instalação Rápida
 
-### Opção 1: Usar o .bat (mais simples)
+### 🚀 Instalação automática (recomendado)
 
-1. Adicione a pasta `C:\rmc` ao seu **PATH** do Windows:
+1. **Baixe o instalador:** [📥 install.bat | Versão: 1.0.0](https://raw.githubusercontent.com/douglaskalleu/rm-cli/master/install.bat)
+2. **Execute** o `install.bat` (clique duplo)
+3. **Feche e reabra** o terminal
+4. **Configure** o caminho base:
+   ```cmd
+   rmc config --base-path "C:\SuaPasta"
+   ```
+5. Pronto! 🎉
+
+> O instalador baixa os arquivos, cria a pasta `%USERPROFILE%\rmc-cli` e adiciona ao PATH automaticamente.
+
+---
+
+### Instalação manual
+
+<details>
+<summary>Opção 1: Usar o .bat</summary>
+
+1. Baixe os arquivos `rm_cli.py` e `rmc.bat` do repositório
+2. Coloque numa pasta (ex: `C:\rmc-cli`)
+3. Adicione essa pasta ao **PATH** do Windows:
    - Pesquise "Variáveis de Ambiente" no menu Iniciar
-   - Em "Path" do usuário, adicione: `C:\rmc`
-
-2. Configure o caminho base:
+   - Em "Path" do usuário, adicione o caminho da pasta
+4. Configure:
    ```cmd
    rmc config --base-path "C:\SuaPasta"
    ```
 
-3. Pronto! Use os comandos abaixo.
+</details>
 
-### Opção 2: Instalar como pacote Python
+<details>
+<summary>Opção 2: Instalar como pacote Python</summary>
 
 ```cmd
-cd C:\Users\Public\rmc
+git clone https://github.com/douglaskalleu/rm-cli.git
+cd rm-cli
 pip install -e .
 ```
+
+</details>
 
 ## 🚀 Como Usar
 
@@ -106,7 +129,7 @@ rmc config --legado-folder "Versoes"
 rmc config --bin-folder "binaries"
 ```
 
-A configuração fica salva em: `%USERPROFILE%\.rmc\config.json`
+A configuração fica salva em: `%USERPROFILE%\.rm\config.json`
 
 ## 📋 Todos os Comandos
 
@@ -117,8 +140,12 @@ A configuração fica salva em: `%USERPROFILE%\.rmc\config.json`
 | `rmc list` | Lista todas as versões |
 | `rmc start host` | Inicia rm.host.exe (Atual) |
 | `rmc start rm` | Inicia rm.exe (Atual) |
-| `rmc start host  VERSAO` | Inicia rm.host.exe (Legado) |
-| `rmc start rm  VERSAO` | Inicia rm.exe (Legado) |
+| `rmc start host VERSAO` | Inicia rm.host.exe (Legado) |
+| `rmc start rm VERSAO` | Inicia rm.exe (Legado) |
 | `rmc start-all` | Inicia host + rm (Atual) |
-| `rmc start-all  VERSAO` | Inicia host + rm (Legado) |
-| `rmc where host/rm [ VERSAO]` | Mostra caminho do executável |
+| `rmc start-all VERSAO` | Inicia host + rm (Legado) |
+| `rmc kill` | Encerra todos os processos RM |
+| `rmc kill host` | Encerra apenas rm.host.exe |
+| `rmc kill rm` | Encerra apenas rm.exe |
+| `rmc where host` | Mostra caminho do executável (Atual) |
+| `rmc where rm VERSAO` | Mostra caminho do executável (Legado) |
