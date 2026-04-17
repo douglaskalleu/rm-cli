@@ -1,8 +1,3 @@
-# 🖥️ RM CLI - Gerenciador ### 🚀 Instalação automática (recomendado)
-
-1. **Baixe o instalador:** [📥 Clique aqui para baixar](https://github.com/douglaskalleu/rm-cli/releases/latest/download/install.bat)
-2. **Execute** o `install.bat` (clique duplo)plicações RM
-
 CLI em Python para iniciar `rm.host.exe`, `rm.exe` e `rm.atualizador.exe`  direto do terminal, sem navegar pelas pastas.
 
 ## 📁 Estrutura esperada
@@ -30,7 +25,7 @@ C:\SuaPasta\
 
 ### 🚀 Instalação automática (recomendado)
 
-1. **Baixe o instalador:** [📥 install.bat | Versão: 1.0.0](https://raw.githubusercontent.com/douglaskalleu/rm-cli/master/install.bat)
+1. **Baixe o instalador:** [📥 Clique aqui para baixar](https://github.com/douglaskalleu/rm-cli/releases/latest/download/install.bat)
 2. **Execute** o `install.bat` (clique duplo)
 3. **Feche e reabra** o terminal
 4. **Configure** o caminho base:
