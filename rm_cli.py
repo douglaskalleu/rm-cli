@@ -5,11 +5,11 @@ import subprocess
 import argparse
 import urllib.request
 from pathlib import Path
-
+from verifica_janelas_windows import aguardar_wcf_iniciar
 VERSION = "1.2.0"
 
 GITHUB_RAW = "https://raw.githubusercontent.com/douglaskalleu/rm-cli/master"
-
+PID_HOST = 0
 # Configuração
 CONFIG_DIR = Path.home() / ".rm"
 CONFIG_FILE = CONFIG_DIR / "config.json"
@@ -88,8 +88,9 @@ def start_process(exe_path: Path):
     print(f"🚀 Iniciando: {exe_path}")
     try:
         os.chdir(exe_path.parent)
-        os.startfile(str(exe_path))
+        proc= subprocess.Popen(str(exe_path),creationflags=subprocess.CREATE_NEW_CONSOLE)
         print(f"✅ {exe_path.name} iniciado com sucesso!")
+        return proc
     except Exception as e:
         print(f"❌ Erro ao iniciar {exe_path.name}: {e}")
         sys.exit(1)
@@ -246,7 +247,7 @@ def cmd_start(args, config: dict):
 def cmd_start_all(args, config: dict):
     """Comando: start-all - Inicia host e rm juntos."""
     version = args.version
-
+    
     if version is None or version.lower() == "atual":
         bin_path = get_atual_bin(config)
         label = "Atual/Release"
@@ -274,8 +275,8 @@ def cmd_start_all(args, config: dict):
 
     host_path = bin_path / config["host_exe"]
     rm_path = bin_path / config["rm_exe"]
-
-    start_process(host_path)
+    procServer=start_process(host_path)
+    aguardar_wcf_iniciar(procServer)
     print()
     start_process(rm_path)
 
