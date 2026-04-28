@@ -6,7 +6,7 @@ import argparse
 import urllib.request
 from pathlib import Path
 from verifica_janelas_windows import aguardar_wcf_iniciar
-VERSION = "1.2.0"
+VERSION = "1.2.1"
 
 GITHUB_RAW = "https://raw.githubusercontent.com/douglaskalleu/rm-cli/master"
 PID_HOST = 0
