@@ -2,6 +2,11 @@
 
 Todas as mudanças notáveis deste projeto serão documentadas aqui.
 
+## [1.2.1] - 2026-04-27
+
+### 🐛 Correções
+- **start-all** - Corrigido ação do comando `rmc start-all` que retornada null ao tentar inciar o RM porque o HOST ainda não estava completamente iniciado
+
 ## [1.2.0] - 2026-04-17
 
 ### ✨ Novidades
