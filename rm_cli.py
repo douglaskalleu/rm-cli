@@ -275,8 +275,10 @@ def cmd_start_all(args, config: dict):
 
     host_path = bin_path / config["host_exe"]
     rm_path = bin_path / config["rm_exe"]
+    config_path = bin_path / "RM.Host.exe.config"  # Arquivo de configuração fica na mesma pasta
+    
     procServer=start_process(host_path)
-    aguardar_wcf_iniciar(procServer)
+    aguardar_wcf_iniciar(procServer, config_file=config_path)
     print()
     start_process(rm_path)
 
