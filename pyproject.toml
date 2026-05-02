@@ -10,3 +10,6 @@ requires-python = ">=3.8"
 
 [project.scripts]
 rmc = "rm_cli:main"
+
+[tool.setuptools]
+py-modules = ["rm_cli", "verifica_janelas_windows"]
